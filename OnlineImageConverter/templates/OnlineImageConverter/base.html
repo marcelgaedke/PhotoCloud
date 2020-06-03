@@ -1,0 +1,32 @@
+<!doctype html>
+{% load static %}
+  <html>
+      <head>
+            <meta charset="utf-8">
+            {% block meta %}
+            {% endblock %}
+
+
+            <link rel="stylesheet" type="text/css" href="{% static 'OnlineImageConverter/StyleAssets/main_style.css' %} " />
+          <title>Photo Cloud</title>
+      </head>
+
+      <body>
+        <div id="header">
+          <h1>Photo Cloud</h1>
+          {% load static %}
+        </div>
+        <p>
+            {% if user.is_authenticated %}
+             User: {{ user.get_username }} (<a class="link" href="{% url 'logout'%}?next=/">Logout</a>)
+           {% else %}
+             User: Guest (<a class= "link" href="{% url 'login'%}?next=/start/">Login</a>)
+           {% endif %}
+        </p>
+            <hr>
+            {% block content %}
+            Placeholder block content
+            {% endblock %}
+            <hr>
+     </body>
+</html>

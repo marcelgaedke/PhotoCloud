@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+  <p>
+      {% if user.is_authenticated %} Hello, {{ user.get_username }}. Welcome back!
+      {% else %}
+        Hello, Guest!
+      {% endif %}<br>
+      {%if albums%}
+          These are your Photo Albums:
+          <ul>
+          {% for album in albums %}
+                <li><a class="list" href="/album/{{album.album_id}}">{{album.album_name}}</a></li>
+           {% endfor %}
+          </ul>
+       {% else %}
+          You have no Photo Albums
+       {% endif %}
+  </p>
+
+
+<hr>
+<form method="post" enctype="multipart/form-data" action="/create_album/">
+{% csrf_token %}
+<p>Create new album:</p>
+<input type="text" width="35" name="album_name">
+    <br>
+<button type="submit">create</button>
+</form>
+
+{% endblock %}
